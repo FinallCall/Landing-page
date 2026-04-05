@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Call AI – Chat Widget</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: transparent;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  /* ── Widget Shell ── */
+  .widget {
+    width:  480px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 0px solid #bcbcc7;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 5px 3px rgba(56, 63, 255, 0.1);
+  }
+
+  /* ── Top Bar ── */
+  .topbar {
+    background:white;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid#bcbcc7;
+  }
+  .logo-mark {
+    width: 34px; height: 34px;
+    border-radius: 100px;
+    background: black;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 400; color: #fff;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+  .topbar-info { flex: 1; }
+  .topbar-title { font-size: 14px; font-weight: 500; color: black; letter-spacing: 0px; }
+  .topbar-sub {
+    font-size: 12px;
+    color: grey;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .pulse {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    position: relative;
+  }
+  .pulse::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: rgba(34,197,94,0.3);
+    animation: pulse 1.8s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  /* ── Message Feed ── */
+  .feed-wrap {
+    height: 340px;
+    overflow: hidden;
+    position: relative;
+    background: white;
+  }
+  .feed {
+    background: white;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    transition: top 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .timestamp {
+    text-align: center;
+    font-size: 12px;
+    color: #bcbcc7;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    margin: 2px 0;
+  }
+
+  /* message rows */
+  .row { display: flex; align-items: flex-end; gap: 8px; }
+  .row.user { flex-direction: row-reverse; }
+
+  .ai-avatar {
+    width: 26px; height: 26px;
+    border-radius: 100px;
+    background: black;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; color: #fff;
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
+
+  .bubble {
+    max-width: 360px;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 1.25;
+    border-radius: 18px;
+    animation: fadeUp 0.3s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .row.user .bubble {
+    background: #2563eb;
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+  .row.ai .bubble {
+    background: #f3f4f6;
+    color: black;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-bottom-left-radius: 4px;
+  }
+
+  /* ── Typing Indicator ── */
+  .typing-bubble {
+    background: #f3f4f6;
+    border-radius: 18px;
+    border-bottom-left-radius: 4px;
+    padding: 12px 16px;
+    display: flex; gap: 5px; align-items: center;
+    animation: fadeUp 0.3s ease both;
+  }
+  .typing-bubble.user-typing {
+    background: #2563eb;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 4px;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #aaa;
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+  .typing-bubble.user-typing .dot { background: rgba(255,255,255,0.6); animation-name: bounceWhite; }
+  .dot:nth-child(2) { animation-delay: 0.18s; }
+  .dot:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); background: #555; }
+  }
+  @keyframes bounceWhite {
+    0%, 80%, 100% { transform: translateY(0); background: rgba(255,255,255,0.6); }
+    40% { transform: translateY(-5px); background: white; }
+  }
+
+  /* ── Staff Card ── */
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 360px;
+    margin-left: 34px;
+    animation: fadeUp 0.35s ease both;
+    border: 1px solid rgb(161, 159, 159);
+  }
+  .card-header {
+    border-bottom: 1px solid rgb(161, 159, 159);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .avatar-gr{
+    gap: 12px;
+    display:flex;
+  }
+
+  .staff-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgb(171, 171, 232), #6be4ff);
+    display:flex; 
+    align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; color: #fff;
+    flex-shrink: 0;
+  }
+  .staff-name { font-size: 16px; font-weight: 400; color: #0e1b45; line-height: 1.2;}
+  .staff-role { font-size: 12px; color:#808bb1; }
+  .star-gr {text-align: right;}
+  .stars { color: #2563eb; font-size: 10px; letter-spacing: 0.8px;}
+
+  .card-body { padding: 0px 24px; display: flex; flex-direction: column;  }
+  .info-row {
+    align-items: center; 
+    font-size: 14px;
+    font-weight:200 200;
+    line-height: 1.5;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: black;
+  }
+  .info-row strong { color: grey; font-weight: 100; }
+  .badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(211, 243, 225, 0.366);
+    color: green;
+    border: 1px solid green;
+  }
+
+  .badge-gr {padding: 8px 12px;}
+
+  .badge-V {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: White(211, 243, 225, 0.366);
+    color: Blue;
+    border: 1px solid Blue;
+
+  }.badge-T {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(211, 243, 225, 0.0);
+    color: Grey;
+    border: 1px solid Grey;
+  }
+
+  .card-footer {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 8px 11px;
+    display: flex; gap: 7px;
+  }
+  .btn-confirm {
+    flex: 1; padding: 7px 0;
+    border-radius: 9px; border: none;
+    background: #2563eb;; color: #fff;
+    font-size: 12px; font-weight:400;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-confirm:hover { background:#0a43bf;; }
+  .btn-confirm:active { transform: scale(0.97); }
+ 
+
+  /* ── Input Bar ── */
+  .input-bar {
+    padding: 10px 12px;
+    border-top: 1px solid#bcbcc7;
+    display: flex; align-items: center; gap: 8px;
+    background: white;
+  }
+  .input-pill {
+    flex: 1;
+    background: black;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: grey;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .input-pill::placeholder { color: rgba(255,255,255,0.28); }
+  .send-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%; border: none;
+    background: #2563eb;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .send-btn:active { transform: scale(0.93); }
+
+  /* ── Hidden elements ── */
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="widget">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo-mark">FC</div>
+    <div class="topbar-info">
+      <div class="topbar-title">Finallcall AI</div>
+      <div class="topbar-sub">
+        <div class="pulse"></div>
+        Online
+      </div>
+    </div>
+  </div>
+
+  <!-- Message feed -->
+  <div class="feed-wrap">
+    <div class="feed" id="feed">
+      <div class="timestamp">Today, 5:41 PM</div>
+    </div>
+  </div>
+
+  <!-- Input bar -->
+  <div class="input-bar">
+    <input class="input-pill" id="inputBox" type="text" placeholder="Ask me for staff…" />
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+        <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+      </svg>
+    </button>
+  </div>
+
+</div>
+
+<script>
+  const feed = document.getElementById('feed');
+  const inputBox = document.getElementById('inputBox');
+
+  const WRAP_H = 340;
+
+  function scrollFeed() {
+    const feedH = feed.scrollHeight;
+    if (feedH > WRAP_H) {
+      feed.style.top = (WRAP_H - feedH) + 'px';
+    }
+  }
+
+  function addUserBubble(text) {
+    const row = document.createElement('div');
+    row.className = 'row user';
+    row.innerHTML = `<div class="bubble">${text}</div>`;
+    feed.appendChild(row);
+    requestAnimationFrame(scrollFeed);
+  }
+
+  function addAIBubble(text) {
+    const row = document.createElement('div');
+    row.className = 'row ai';
+    row.innerHTML = `<div class="ai-avatar">AI</div><div class="bubble">${text}</div>`;
+    feed.appendChild(row);
+    requestAnimationFrame(scrollFeed);
+  }
+
+  function addTyping() {
+    const row = document.createElement('div');
+    row.className = 'row ai';
+    row.id = 'typing-row';
+    row.innerHTML = `
+      <div class="ai-avatar">AI</div>
+      <div class="typing-bubble">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>`;
+    feed.appendChild(row);
+    requestAnimationFrame(scrollFeed);
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typing-row');
+    if (t) t.remove();
+  }
+
+  function addUserTyping() {
+    const row = document.createElement('div');
+    row.className = 'row user';
+    row.id = 'user-typing-row';
+    row.innerHTML = `
+      <div class="typing-bubble user-typing">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>`;
+    feed.appendChild(row);
+    requestAnimationFrame(scrollFeed);
+  }
+
+  function removeUserTyping() {
+    const t = document.getElementById('user-typing-row');
+    if (t) t.remove();
+  }
+
+  function addCard() {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+    
+    
+      <div class="card-header">
+
+        <div class="avatar-gr">
+          <div class="staff-avatar">
+            JM
+          </div>
+          <div>
+            <div class="staff-name">
+              J**** M.
+            </div>
+            <div class="staff-role">
+              Waiter | Westminter
+            </div>
+          </div>
+        </div>
+
+        <div class="star-gr">
+          <span class="stars">★★★★☆</span><br>
+          <span class="badge">Active</span>
+        </div>
+          
+      </div>
+
+
+      <div class="card-body">
+        <div class="info-row">
+          Summary<strong> 
+            <div class="badge-gr"><span class="badge-V">Verified Member</span>.  <span class="badge-T">Trained</span></div>
+          · 48 shifts filled
+          <br>· Fluent in Japanese
+          <br>· Fine dining experience
+          </strong>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn-confirm">Confirm</button>
+      </div>`;
+    feed.appendChild(card);
+    requestAnimationFrame(scrollFeed);
+  }
+
+  const sequence = [
+    { type: 'user',        delay: 00,  text: 'Need 1 waiter in Soho Now!' },
+    { type: 'typing',      delay: 800 },
+    { type: 'ai',          delay: 1200, text: 'Here is available staff' },
+    { type: 'card',        delay: 800 },
+    { type: 'ai',          delay: 1200, text: 'Do you want to confirm booking?' },
+    { type: 'user-typing', delay: 1900 },
+    { type: 'user',        delay: 1200,  text: 'Sure' },
+    { type: 'typing',      delay: 800 },
+    { type: 'ai',          delay: 1000, text: 'Confirmed — J. will be there in 30 mins!' },
+  ];
+
+  function resetFeed() {
+    feed.style.transition = 'none';
+    feed.style.top = '0px';
+    feed.innerHTML = '<div class="timestamp">Today, 5:41 PM</div>';
+  }
+
+  function runSequence(i) {
+    if (i >= sequence.length) {
+      setTimeout(() => {
+        resetFeed();
+        setTimeout(() => {
+          feed.style.transition = 'top 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+          runSequence(0);
+        }, 100);
+      }, 2500);
+      return;
+    }
+    const item = sequence[i];
+    setTimeout(() => {
+      if      (item.type === 'user-typing') { addUserTyping(); }
+      else if (item.type === 'user')        { removeUserTyping(); addUserBubble(item.text); }
+      else if (item.type === 'typing')      { addTyping(); }
+      else if (item.type === 'ai')          { removeTyping(); addAIBubble(item.text); }
+      else if (item.type === 'card')        { addCard(); }
+      runSequence(i + 1);
+    }, item.delay);
+  }
+
+  
+
+  inputBox.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+
+  runSequence(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>finallcall — ai hiring for london hospitality</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:rgb(237, 241, 255);
+  --surface:#eef2ff;
+  --card:#ffffff;
+  --border:#bcbcc7;
+  --border-light:#c8cfe8;
+  --accent:blue;
+  --accent-rgb:0,0,255;
+  --accent-dark:#b2c0ff;
+  --navy:#05102a;
+  --text:black;
+  --muted:#666660;
+  --muted2:#888882;
+  --green:#22c55e;
+  --mid:#2d5be3;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-size:15px;line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:#edf1ff21;
+  backdrop-filter:blur(8px) url(#displacementfilter1);
+   -webkit-backdrop-filter:blur(4px) url(#displacementfilter1);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  height:56px;
+  display:flex;align-items:center;gap:24px;
+   
+  
+}
+.logo{
+  font-family:'Inter',sans-serif;
+  font-size:20px;font-weight:800;letter-spacing:-.5px;
+  color:var(--text);text-decoration:none;
+  display:flex;align-items:center;gap:4px;
+}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:4px;flex:1}
+.nl{
+  color:var(--muted);font-size:13px;font-weight:500;
+  padding:6px 12px; border-radius:99px;
+  text-decoration:none;transition:all .15s;
+}
+.nl:hover{color:var(--text);background:var(--card)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.n-ghost{
+  background:none;border:1px solid var(--border-light);
+  color:var(--muted2);padding:7px 16px;border-radius:99px;
+  font-size:13px;font-weight:500;font-family:'Inter',sans-serif;
+  cursor:pointer;transition:all .15s;text-decoration:none;
+}
+.n-ghost:hover{border-color:var(--border);color:var(--text);background:var(--card)}
+.n-cta{
+  background:var(--accent);color:#fff;
+  padding:7px 18px;border-radius:99px;
+  font-size:13px;font-weight:600;font-family:'Inter',sans-serif;
+  text-decoration:none;transition:all .15s;
+}
+.n-cta:hover{background:var(--mid)}
+
+/* ── STICKY WRAPPER ── */
+.sticky-hero-wrap {
+  position: relative;       /* establishes stacking context */
+  z-index: 1;
+  
+  padding: 32px;
+ 
+  
+}
+
+.photo-hero {
+  position: sticky;
+  top:70px;
+  z-index: 0;
+  width: 100%;
+  aspect-ratio: 16 / 5;
+}
+
+.photo-hero-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 28px;   /* optional, looks nice */
+}
+.photo-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.photo-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 1;
+}
+
+/* dark overlay so text is readable */
+.photo-hero-overlay {
+  position: absolute;
+  inset: 0;
+  
+  z-index: 1;
+}
+
+ 
+/* ── HERO — glass card on top of video ── */
+.hero {
+  position: relative;
+  z-index: 3;
+  margin: 0px auto 0;  /* pushes hero below the full-height video */
+  margin-bottom: 50px;
+  max-width: 700px;
+  padding: 60px 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: none;
+
+  /* glass effect */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px) saturate(180%) url(#displacementfilter);
+  -webkit-backdrop-filter: blur(4px) saturate(180%) url(#displacementfilter);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 28px;
+  box-shadow:
+    
+    inset 0 1px 0 rgba(255, 255, 255, 0.874),
+    inset 0 -1px 0 rgba(178, 179, 182, 0.6),
+    inset 0 0 4px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* text needs to be white since it's over dark video */
+.hero h1 {  font-family: 'Syne', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 550;
+    line-height: 1.0;
+    letter-spacing: -2px;
+  margin-bottom: 20px;
+  color: #000000; }
+.hero h1 em { color: #044bff; }
+.hero-sub { color: rgba(0, 0, 0, 0.75); margin-left: auto; margin-right: auto; }
+.hero-sub strong { color: #044bff; }
+.contact-link { color: rgba(255,255,255,0.4); }
+
+/* sections after push the glass card up then scroll normally */
+.stats, .what, .marquee, .bg, .testi, .how,
+.pricing-section, .roles-section, .faq-section, .about, .cta, footer {
+  position: relative;
+  z-index: 4;
+}
+
+.hero-orb{
+  position:absolute;pointer-events:none;border-radius:50%;
+  
+}
+
+.orb-b{
+  width:500px;height:500px;
+ z-index: -10;
+  text-align: center;
+  background:radial-gradient(circle,#dbdef699 10%,transparent 40%);
+}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(var(--accent-rgb),.07);
+  border:1px solid rgba(var(--accent-rgb),.15);
+  color:var(--accent);
+  font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  padding:5px 14px;border-radius:99px;margin-bottom:28px;
+  
+} 
+.pulse{
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:ring 2s infinite;
+}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.5)}70%{box-shadow:0 0 0 7px rgba(var(--accent-rgb),0)}100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),0)}}
+
+.hero-btns{
+  display:flex;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:up .8s .3s ease forwards;
+  margin-bottom:15px;
+   padding: 24px;
+}
+
+.btn-primary{
+  background:var(--accent);color:#fff;
+  padding:12px 28px;border-radius:99px;
+  font-size:14px;font-weight:600;font-family:'Inter',sans-serif;
+  text-decoration:none;transition:all .15s;
+   background:var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(25px) saturate(170%) brightness(1.2) url(#displacementfilte1);
+  box-shadow: 
+    0 8px 32px rgba(1, 1, 27, 0.1),
+    inset 0 1px 0 rgba(184, 215, 235, 0.5),
+    inset 0 -1px 0 rgba(3, 37, 210, 0.5),
+    inset 0 0 2px 2px rgba(255, 255, 255, 0.2);
+}
+.btn-primary:hover{background:var(--mid)}
+.btn-outline{
+  background:var(--card);color:var(--text);
+  padding:12px 24px;border-radius:99px;
+  font-size:14px;font-weight:500;font-family:'Inter',sans-serif;
+  text-decoration:none;border:1px solid var(--border);
+  transition:all .15s;
+  box-shadow: 
+    0 8px 32px rgba(1, 1, 27, 0.1),
+    inset 0 1px 0 rgba(184, 215, 235, 0.5),
+    inset 0 -1px 0 rgba(3, 37, 210, 0.5),
+    inset 0 0 2px 2px rgba(255, 255, 255, 0.2);
+}
+.btn-outline:hover{background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5); color:var(--muted)}
+.contact-link{
+    color: var(--border-light);
+    text-align: center;
+    letter-spacing: -.2px;
+    font-size: 12px;
+    font-weight: 10000;
+    line-height: 120%;}
+
+/* hero card */
+.hero-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:28px;
+  opacity:0;animation:up .9s .4s ease forwards;
+  align-self:center;
+}
+.hc-label{
+  font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;
+}
+.ai-row{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:14px 0;
+  border-bottom:1px solid var(--border-light);
+  position:relative;
+}
+.ai-row:last-child{border-bottom:none;padding-bottom:0}
+.ai-ic{
+  width:34px;height:34px;border-radius:8px;flex-shrink:0;
+  background:rgba(var(--accent-rgb),.08);border:1px solid var(--border-light);
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.ai-row h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.ai-row p{font-size:12px;color:var(--muted2);line-height:1.55}
+.ai-badge{
+  display:inline-block;margin-top:6px;
+  background:rgba(var(--accent-rgb),.08);color:var(--accent);
+  font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:2px 10px;border-radius:6px;border:1px solid rgba(var(--accent-rgb),.2);
+}
+
+/* hero stats */
+.hero-stats{
+  display:flex;gap:40px;flex-wrap:wrap;
+  opacity:0;animation:up .8s .35s ease forwards;
+  
+}
+.hero-stat .num{
+  font-family:'Inter',sans-serif;font-size:28px;font-weight:700;
+  letter-spacing:-1px;color:var(--accent);
+}
+.hero-stat .label{color:var(--muted);font-size:12px;margin-top:2px}
+
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── STATS BAR ── */
+.stats{
+  background:transparent;
+  padding: 200px 0;
+}
+.stats-row{
+  max-width:auto;margin:0 auto;
+  display:flex;padding:0 32px;
+}
+.st{
+  flex:1; padding: 32px;
+  border-right:2px solid var(--border);
+  text-align:center;
+}
+.st:last-child{border-right:none}
+.st-n{
+  font-family:'',sans-serif; 
+  font-size:70px;line-height:1;
+  color:var(--text);margin-bottom:12px;
+  letter-spacing:-1px;font-weight:500;
+}
+.st-n em{font-style:normal;color:black)}
+.st-l{font-size:12px;color:var(--muted);font-weight:400}
+
+/* ── SHARED ── */
+.w{max-width:1100px;margin:0 auto;padding:0 32px}
+.ey{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+h2.serif{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(30px,4vw,50px);
+  line-height:1.05;letter-spacing:-1.5px;color:var(--text);
+  font-weight:500;
+}
+h2.serif em{font-style:italic;color:var(--accent)}
+
+
+/* ── WHAT WE DO ── */
+.what{padding:100px 0;
+  border-bottom:1px solid var(--border) }
+
+.what-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start;margin-top:60px;
+}
+
+.what-left p{
+  font-size:16px;font-weight:400;color:var(--muted2);
+  line-height:1.85;margin-bottom:18px;
+}
+.what-left p strong{color:var(--text);font-weight:600}
+.what-left a.link{
+  color:var(--accent);font-size:14px;font-weight:600;
+  text-decoration:none;border-bottom:1px solid rgba(var(--accent-rgb),.3);
+  padding-bottom:1px;transition:border-color .15s;
+}
+.what-left a.link:hover{border-color:var(--accent)}
+
+
+
+/* make left side sticky while right scrolls */
+.what-left {
+  position: sticky;
+  top: 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: none;
+}
+
+/* cards stack with position sticky + increasing top offset */
+.what-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: 0px;z-index: 10;
+  
+}
+
+.w-item {
+  position: sticky;
+  background:rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(3px) saturate(100%) brightness(1.5) url(#displacementfilter);
+  -webkit-backdrop-filter: blur(3px) saturate(100%) brightness(1.5) url(#displacementfilter);
+  box-shadow: 
+    0 8px 32px rgba(1, 1, 27, 0.1),
+    inset 0 1px 0 rgba(184, 215, 235, 0.5),
+    inset 0 -1px 0 rgba(178, 179, 182, 0.277),
+    inset 0 0 4px 4px rgba(255, 255, 255, 0.2);
+  padding: 48px;
+  transition: box-shadow 0.5s;
+}
+
+
+/* each card stacks 16px lower than the last */
+.w-item:nth-child(1) { top: 72px; }
+.w-item:nth-child(2) { top: 72px;}
+.w-item:nth-child(3) { top: 72px; }
+.w-item:nth-child(4) { top: 72px; }
+.w-item:hover {
+    background:rgba(248, 248, 255, 0.356) ;
+   box-shadow: inset -3px -2px 1px 1px rgba(255, 255, 255, 0.2);
+   backdrop-filter: blur(10px) saturate(10%) brightness(1.08),
+   inset 1px 1px 3px 1px rgba(98, 98, 101, 0.2);
+   border: 0.5px solid var(--border-light);
+}
+.w-item-head{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+.w-item-head h4{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(30px,4vw,30px);
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  font-weight:500;
+  font-style:italic;color:var(--accent)}
+
+.w-tag{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:rgba(var(--accent-rgb),.07);
+  padding:3px 10px;border-radius:6px;border:1px solid rgba(var(--accent-rgb),.2);
+}
+.w-item p{font-size:12px;color:rgba(0, 0, 0, 0.423);line-height:1.7;font-weight:300; letter-spacing:0.4px;}
+
+.w-step-n{
+  font-family:'Inter',sans-serif;
+  font-size:80px;
+  color:#0000ff17;
+  font-weight: 80px;
+  font-style:italic;
+  position:absolute;top:20px;left:24px;line-height:1;
+  user-select:none;pointer-events:none;
+}
+
+.what-orb{
+  position:absolute;
+  pointer-events:none;
+  border-radius:50%;
+  
+}
+.orb-c{
+  width:800px;height:800px;
+  top: 900px;right:00px;
+  background:radial-gradient(circle,rgba(120, 122, 234, 0.22) 0%,transparent 55%);
+}
+
+/* ── MARQUEE ── */
+.marquee{
+  padding:18px 0;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--card);
+}
+.m-track{display:flex;width:max-content;animation:mq 30s linear infinite}
+.m-track:hover{animation-play-state:paused}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.m-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 24px;
+  font-size:12px;font-weight:500;color:var(--muted);
+  white-space:nowrap;letter-spacing:.02em;
+}
+.m-logo {
+  height: 80px;
+  width: auto;
+}
+
+.m-dot{width:3px;height:3px; border-radius:0%;background:var(--muted);flex-shrink:0}
+
+
+
+/* ── TESTIMONIALS ── */
+.testi{padding:100px 0;
+  border-bottom:1px solid var(--border);
+  background-image: linear-gradient(to top, rgba(59, 87, 170, 0.12) 30%, #e7f0fd 100%);)}
+.t-head{
+  margin-bottom:52px;
+}
+.t-head .ey {
+    color: #a8c0ff;
+}
+.t-grid{
+  display:flex;
+  gap: 24px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:16px;
+  backdrop-filter: blur(20px);
+  cursor:grab;
+  user-select:none;
+  scrollbar-width:none;
+}
+.t-grid::-webkit-scrollbar{display:none}
+.t-grid.dragging{cursor:grabbing}
+.t-card{
+  flex:0 0 340px;
+  background:rgb(237, 241, 255, 0.5);
+  box-shadow: inset 3px 3px 3px 1px rgb(237, 241, 255, 0.7),
+    inset 0 5px 2px rgba(255, 255, 255, 0.73),
+    inset 0 -1px 1px rgba(129, 148, 241, 0.451),
+    inset 0 0 2px 2px rgba(165, 192, 225, 0.404);
+  border:1px solid var(--border-light);
+  border-radius:24px;padding:32px 28px;
+  transition:border-color .15s;
+  scroll-snap-align:start;
+}
+.t-card.feat{background:var(--text);border-color:var(--text)}
+.t-card.feat .t-q{color:rgba(255,255,255,.8)}
+.t-card.feat .t-nm{color:#fff}
+.t-card.feat .t-vn{color:rgba(255,255,255,.35)}
+
+.t-stars{color:var(--accent);font-size:32px;letter-spacing:4px;margin-bottom:16px; align-items: center;}
+.t-card.feat .t-stars{color:#a8c0ff}
+.t-q{
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-style:italic;font-weight:400;
+  color:var(--text);line-height:1.65;margin-bottom:24px;
+}
+.t-auth{display:flex;align-items:center;gap:12px}
+.t-av{
+  width:38px;height:38px;border-radius:8px;
+  background:#bbc0d7;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;font-size:16px;color:#fff;flex-shrink:0;font-weight:700;
+}
+.t-nm{font-size:13px;font-weight:600;color:var(--text)}
+.t-vn{font-size:11px;color:var(--muted);margin-top:2px}
+
+.t-card:hover {
+  background:rgb(237, 241, 255, 0.5);
+  box-shadow:4px 4px 5px rgba(173, 179, 191, 0.4);
+}
+
+
+/* ── HOW IT WORKS ── */
+.how{padding:100px 0;background:var(--bg);border-bottom:1px solid var(--border)}
+.how-wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+.how-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:60px;gap:32px;flex-wrap:wrap;
+}
+.how-head-right{
+  max-width:340px;
+  font-size:15px;font-weight:400;color:var(--muted2);line-height:1.75;
+}
+.how-head .serif{color:#000000;
+font-weight: 450;}
+  
+.how-steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap: 12px;px;
+  
+  border-radius:12px;overflow:hidden}
+
+.h-step{
+  border-radius: 24px;
+  background:var(--card);
+  padding:40px 32px;
+  transition:background .15s;position:relative;
+}
+
+.h-step:hover{
+  background:#f8f9ff;
+  
+}
+.h-step-n{
+  font-family:'Inter',sans-serif;
+  font-size:96px;color:rgba(0,0,0,.04);
+  position:absolute;bottom:20px;right:24px;line-height:1;
+  user-select:none;pointer-events:none;font-weight:400;
+}
+.h-step-ic{
+  width:auto;height: 160px;border-radius:10px;
+  background:rgba(var(--accent-rgb),.08);border:1px solid rgba(var(--accent-rgb),.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:24px;
+}
+.h-step-time{
+  font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;display:block;
+}
+.h-step h3{
+  font-family:'Inter',sans-serif;
+  text-transform:uppercase;
+  font-size:24px;color:var(--text);font-weight:400;
+  margin-bottom:10px;letter-spacing:-.5px;
+
+}
+.h-step p{font-size:13px;color:var(--muted2);line-height:1.75;font-weight:400}
+
+/* ──  VIDEO BACKGROUND ── */
+
+.bg{}
+.bg-wrapper{
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  height: fit-content;
+  background-size: cover;
+}
+.bg-wrapper video{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height:100%;
+  object-fit: cover;
+  z-index: -10;
+  filter: contrast(90%);
+  pointer-events: none;
+  
+}
+.bg-wrapper .bg{
+  position: relative;
+  z-index: 1;
+  border-bottom: none; /* border now on wrapper */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.bg-wrapper h1{
+  font-family: 'inter', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -2px;
+    text-align:center;
+  color: rgb(255, 255, 255);
+  margin-top:300px;
+  margin-bottom:300px;
+  opacity:0;animation:up .8s .1s ease forwards;
+  align-content: center;
+}
+
+
+/* ── PRICING ── */
+.pricing-section{
+  background:#1c1c1c;
+  padding:52px 32px 60px;
+}
+.pricing-inner{max-width:880px;margin:0 auto}
+ 
+.pricing-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#a8c0ff;color:#000000;
+  font-size:12px;font-weight:600;letter-spacing:.3px;
+  padding:5px 14px;border-radius:99px;
+  margin-bottom:22px;
+}
+
+.pricing-title h2{
+     font-family: 'Inter', sans-serif;
+    font-size: clamp(30px, 4vw, 50px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 22px;
+}
+.pricing-title em{
+    color: #a8c0ff;
+    
+}
+ 
+.pricing-title p{
+  color:#ffffff;
+  font-size: 14px;
+  letter-spacing:-1.2px;
+  font-weight: 400;
+  line-height: 1.7;
+  margin-bottom:40px;
+}
+
+.pricing-title h4{
+  color:#ffffff;
+  font-size: 14px;
+  letter-spacing:-0.5px;
+  font-weight: 400;
+  line-height: 1.7;
+  margin-bottom:12px;
+}
+
+.pricing-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media(max-width:620px){.pricing-grid{grid-template-columns:1fr}}
+ 
+.p-card{
+  background:#ffffff;
+  
+  border-radius:20px;
+  padding:28px 26px 24px;
+  display:flex;flex-direction:column;
+  margin-bottom:60px;
+  
+  box-shadow:
+    inset 0 2px 0 1px rgba(172, 195, 249, 0.398),
+    inset 0 -1.5px 0 1px rgba(100,130,220,0.22),
+    inset 1.5px 0 0 rgba(255,255,255,0.45),
+    inset -1.5px 0 0 rgba(255,255,255,0.25),
+    0 0 1cqi 1px rgba(0, 0, 0, 0.862),
+    0 12px 72px rgba(147, 177, 217, 0.513),
+    0 3px 10px rgba(178, 233, 242, 0.336);
+  
+
+}
+.p-card-title{
+  font-size:17px;font-weight:700;color:#111;
+  line-height:1.3;margin-bottom:10px;
+}
+.p-card-desc{
+  font-size:12px;color:#999;line-height:1.65;
+  margin-bottom:22px;
+}
+.p-features{display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.p-feat{
+  display:flex;align-items:center;gap:9px;
+  font-size:13px;color:#222;font-weight:500;
+}
+.p-feat-ic{
+  width:18px;height:18px;border-radius:50%;
+  background:#111;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;flex-shrink:0;font-weight:700;
+}
+.p-divider{height:1px;background:#efefef;margin:0 0 18px}
+.p-installment{
+  display:flex;align-items:center;gap:7px;
+  font-size:11.5px;color:#999;margin-bottom:14px;
+}
+.p-install-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#f59e0b;flex-shrink:0;
+}
+.p-bottom{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:10px;
+  flex-wrap:wrap;margin-top:auto;
+}
+.p-price-main{
+  font-size:26px;font-weight:800;color:#111;letter-spacing:-1px;
+}
+.p-price-old{
+  font-size:12px;color:#bbb;text-decoration:line-through;
+  font-weight:400;margin-left:5px;
+}
+.p-btn{
+  background:#111;color:#fff;border:none;
+  text-decoration:none;
+  border-radius:10px;padding:11px 18px;
+  font-size:13px;font-weight:600;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;white-space:nowrap;
+  transition:background .15s, transform .1s;
+}
+.p-btn:hover{background:#2d2d2d}
+.p-btn:active{transform:scale(.97)}
+
+
+.roles-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:48px;
+  gap:32px;
+  flex-wrap:wrap;
+  
+}
+.roles-sub{max-width:300px;
+  font-size:14px;
+  color:black;
+  font-weight:400;
+  line-height:1.7}
+
+.roles-grid{
+  display:grid;grid-template-columns:repeat(8,1fr);gap:12px;
+  padding-bottom: 100px;
+}
+
+.r-card{
+  border-radius:24px;
+  padding:12px 10px;text-align:center;
+  background:rgb(255, 255, 255, 0);
+  transition:all .15s;cursor:default;
+  font-size:12px;font-weight:400;color:white;
+  backdrop-filter: blur(3px) saturate(100%) brightness(1.05) url(#displacementfilter);
+   -webkit-backdrop-filter: blur(3px) saturate(100%) brightness(1.05) url(#displacementfilter);
+  box-shadow: 
+    0 8px 32px rgba(1, 1, 27, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.874),
+    inset 0 -1px 0 rgba(178, 179, 182, 0.6),
+    inset 0 0 4px 4px rgba(255, 255, 255, 0.2);
+}
+.r-card:hover{
+  background: rgb(255, 255, 255, 0.9);
+  color:black;
+  transform:translateY(-2px);
+  transform:scale(1.2);
+  transition:0.55s;
+}
+ 
+/* ── FAQ ── */
+.faq-section{
+  background:#fff;
+  padding:52px 32px 72px;
+}
+.faq-inner{max-width:880px;margin:0 auto}
+ 
+.faq-title{
+  font-size:36px;font-weight:700;color:#111;
+  letter-spacing:-1.2px;margin-bottom:36px;
+}
+.faq-list{display:flex;flex-direction:column}
+ 
+.faq-item{border-bottom:1px solid #e8e8e8}
+ 
+.faq-q{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  padding:20px 0;
+  cursor:pointer;gap:16px;
+  user-select:none;
+}
+.faq-q-text{
+  font-size:14px;font-weight:500;color:#111;line-height:1.4;
+}
+.faq-icon{
+  width:30px;height:30px;border-radius:50%;
+  border:1.5px solid #d0d0d0;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:18px;font-weight:300;
+  color:#111;line-height:1;
+  transition:background .25s, border-color .25s, transform .35s cubic-bezier(0.4,0,0.2,1), color .25s;
+}
+.faq-item.open .faq-icon{
+  background:#111;border-color:#111;color:#fff;
+  transform:rotate(45deg);
+}
+ 
+.faq-body{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .38s cubic-bezier(0.4,0,0.2,1);
+}
+.faq-item.open .faq-body{
+  grid-template-rows:1fr;
+}
+.faq-body-inner-wrap{
+  overflow:hidden;
+}
+.faq-body-text{
+  font-size:13.5px;color:#666;line-height:1.75;
+  padding-bottom:20px;
+  padding-right:48px;
+}
+
+
+/* ── ABOUT ── */
+/* ── ABOUT ── */
+.about { padding: 100px 0; background: var(--text); border-bottom: 1px solid var(--border); }
+.about-wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+.about .ey { color: #a8c0ff; }
+.about h2.serif { color: #fff; }
+.about h2.serif em { color: #a8c0ff; }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; margin-top: 60px; align-items: start;
+}
+.about-left p {
+  font-size: 15px; font-weight: 400;
+  color: rgba(255,255,255,.5); line-height: 1.85; margin-bottom: 16px;
+}
+.about-left p strong { color: rgba(255,255,255,.85); font-weight: 600; }
+.about-right {
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.about-right img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+   border-radius: 20px;
+}
+.about-img-placeholder {
+  color: rgba(255,255,255,1);
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+  text-align: center;
+}
+
+
+/* ── CTA ── */
+.cta{
+  padding:120px 32px;
+  text-align:center;
+  background:var(--card);border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.cta-in{max-width:600px;margin:0 auto}
+.cta .ey{justify-content:center;display:inline-flex}
+.cta h2.serif{margin-bottom:16px}
+.cta p{font-size:16px;font-weight:400;color:var(--muted2);line-height:1.8;margin-bottom:44px}
+.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn-dark{
+  background:var(--text);color:#fff;
+  padding:13px 30px;border-radius:99px;
+  font-size:14px;font-weight:600;
+  text-decoration:none;transition:all .15s;
+  display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;
+}
+.btn-dark:hover{background:#969697}
+.btn-brd{
+  background:var(--bg);color:var(--text);
+  padding:13px 26px;border-radius:99px;
+  font-size:14px;font-weight:500;
+  text-decoration:none;border:1px solid var(--border);
+  transition:all .15s;font-family:'Inter',sans-serif;
+}
+.btn-brd:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--text);
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:64px 32px 40px;
+}
+.f-in{max-width:1100px;margin:0 auto}
+.f-top{
+  display:flex;justify-content:space-between;
+  margin-bottom:48px;flex-wrap:wrap;gap:40px;align-items:flex-start;
+}
+.f-logo{
+  font-family:'Inter',sans-serif;
+  font-size:20px;font-weight:800;color:#fff;
+  text-decoration:none;display:block;margin-bottom:10px;letter-spacing:-.5px;
+}
+.f-logo span{color:#a8c0ff}
+.f-brand p{
+  font-size:13px;font-weight:400;
+  color:rgba(255,255,255,.3);line-height:1.7;max-width:230px;
+}
+.f-cols{display:flex;gap:48px;flex-wrap:wrap}
+.f-col h5{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.2);margin-bottom:16px;
+}
+.f-col a{
+  display:block;color:rgba(255,255,255,.4);font-size:13px;font-weight:400;
+  text-decoration:none;margin-bottom:10px;transition:color .15s;
+}
+.f-col a:hover{color:#fff}
+.f-bot{
+  border-top:1px solid rgba(255,255,255,.07);padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.f-copy{font-size:12px;color:rgba(255,255,255,.2);font-weight:400}
+.f-soc{display:flex;gap:6px}
+.soc{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.3);text-decoration:none;transition:all .15s;
+}
+.soc:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+
+/* ── MOBILE ── */
+@media(max-width:960px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .hero{padding:48px 16px 40px}
+  .hero-card{display:none}
+  .stats-row{padding:0 16px;flex-wrap:wrap}
+  .st{min-width:50%;border-right:none;border-bottom:1px solid var(--border-light)}
+  .w,.how-wrap,.about-wrap{padding:0 16px}
+  .what-grid,.why-grid,.about-grid{grid-template-columns:1fr;gap:0}
+  .feat{border-right:none!important}
+  .feat:nth-child(3){border-bottom:1px solid var(--border)!important}
+  .how-steps,.t-grid{grid-template-columns:1fr}
+  .roles-grid{grid-template-columns:repeat(4,1fr)}
+  .cta{padding:80px 16px}
+  footer{padding:48px 16px 32px}
+  .how-head{flex-direction:column;gap:16px}
+  .roles-head{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<svg style="display:none;">
+  <filter id="displacementfilter" x="0%" y="0%" width="100%" height="100%">
+    <feImage
+      href="images/dpmmap.png"  
+      preserveAspectRatio="none"
+      result="map" />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="map"
+      scale="100"
+      xChannelSelector="R"
+      yChannelSelector="G" />
+  </filter>
+   <filter id="displacementfilter1" x="-10%" y="-10%" width="120%" height="120%">
+    <feImage
+      href="images/dpm.png"
+      preserveAspectRatio="none"
+      result="map" />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="map"
+      scale="40"
+      xChannelSelector="R"
+      yChannelSelector="G" />
+  </filter>
+</svg>
+
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+  <img src="images/Logo.png" alt="Finallcall" style="height:32px;width:auto;display:block;">
+</a>
+   
+  <div class="nav-right">
+    <a href="https://calendly.com/apcy-w-finallcall/30min" class="n-ghost">book a demo</a>
+    <a href="https://wa.me/447787729413" class="n-cta">request staff →</a>
+  </div>
+</nav>
+
+
+<!-- STICKY VIDEO WRAPPER — video releases after hero scrolls past -->
+<div class="sticky-hero-wrap">
+
+<!--photo bg-->
+<section class="photo-hero">
+  <div class="photo-hero-inner">
+    <video class="photo-hero-bg" autoplay muted loop playsinline>
+    
+  <source src="https://res.cloudinary.com/dmuqexilk/video/upload/product1_ysch2c.mp4" type="video/mp4">
+</video>
+    
+    <div class="photo-hero-overlay"></div>
+    <div class="photo-hero-content">
+      
+    </div>
+  </div>
+</section>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb orb-b"></div>
+  <div class="hero-tag"><span class="pulse"></span>· ai real-time hiring</div>
+  <h1>Hiring that's<br>fast, fair,</em> <br>and <em>human.</em></h1>
+  <p class="hero-sub">
+    The first <strong>AI anti-discrimination hiring platform</strong> for London restaurants 
+    <br>
+    matching staff <i>purely</i> on skill. No bias. No delay.
+  </p>
+  <div class="hero-btns">
+    <a href="https://www.finallcall.com" class="btn-primary">request staff</a>
+    <a href="https://calendly.com/apcy-w-finallcall/30min" class="btn-outline">book a demo</a>
+  </div>
+  <a href="https://wa.me/447787729413" target="_blank" class="contact-link">Any question? Contact us</a>
+
+</div>
+
+</div>
+
+ 
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-row">
+    <div class="st"><div class="st-n"><em data-target="60" data-suffix="+">0</em></div><div class="st-l">restaurants lists</div></div>
+    <div class="st"><div class="st-n"><em data-target="300" data-suffix="+">0</em></div><div class="st-l">trained staff ready</div></div>
+    <div class="st"><div class="st-n"><em data-target="30" data-suffix="mins">0</em></div><div class="st-l">average placement</div></div>
+    <div class="st"><div class="st-n"><em data-target="92.3" data-suffix="%">0</em></div><div class="st-l">reduce discrimination hiring</div></div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="m-track">
+   <span class="m-item"> Developed with guidance from Leading Hospitality Associations <span class="m-dot"></span></span>
+    <span class="m-item"> <img class="m-logo" src="images/chme.jpg" alt="CHME"><span class="m-dot"></span></span>
+    <span class="m-item"><img class="m-logo" src="images/UOS.jpg" alt="UOS"></span></span>
+    <span class="m-item"><img class="m-logo" src="images/atbuk.jpg" alt="atbuk"></span></span>
+    <span class="m-item">and Hospitality Tech Experts <span class="m-dot"></span></span>
+    <span class="m-item"><img class="m-logo" src="images/braze.jpg" alt="braze"></span></span>
+    <span class="m-item"><img class="m-logo" src="images/lighthouse.jpg" alt="lighthouse"></span></span>
+    <span class="m-item"><img class="m-logo" src="images/inntelo.jpg" alt="inntelo"></span></span>
+
+  </div>
+</div> 
+
+<!-- WHAT WE DO -->
+<section class="what" id="usp">
+  <div class="w">
+
+    <div class="what-orb orb-c"></div>
+    <h2 class="serif rv">London's first  <em>realtime fair-hire</em><br>staffing platform.</h2>
+    <div class="what-grid">
+      <div class="what-left rv">
+        <iframe 
+        src="finalcall-chat-widget 3-size.html"
+        width="600" 
+        height="560" 
+        style="border:none; border-radius:24px;"
+        scrolling="no">
+        </iframe>
+        </div>
+      <div class="what-right">
+        <div class="w-item rv d1">
+           
+          <div class="w-item-head">
+            <h4>anti-bias hiring</h4>
+            
+          </div>
+          <p>Candidates stay anonymised until you confirm. </p>
+          <div class="w-step-n">01</div>
+        </div>
+        <div class="w-item rv d2">
+          <div class="w-item-head">
+            <h4><img src="" alt="" srcset="">real-time matching</h4>
+            
+          </div>
+          <p>AI help find the right candidate and summerise relavent skill in real-time</p>
+          <div class="w-step-n">02</div>
+        </div>
+        <div class="w-item rv d3">
+          <div class="w-item-head">
+            <h4>pay as you go</h4>
+            
+          </div>
+          <p>Pay as you go. No upfront. Cancel anytime.</p>
+          <div class="w-step-n">03</div>
+        </div>
+        <div class="w-item rv d4">
+          <div class="w-item-head">
+            <h4>high quality candidate</h4>
+          </div>
+          <p>We developed a trustworthy curation system with a leading hospitality association.</p>
+          <div class="w-step-n">04</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- vdo -->
+<div class="bg">
+  <div class="bg-wrapper">
+  <video autoplay muted playsinline>
+    <source src="https://res.cloudinary.com/dmuqexilk/video/upload/v1775316136/V2_kxkerq.mov" type="video/mp4">
+  </video>
+  <h1>Staff are trained by <br>
+ London restaurant experts</h1>
+</div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="w">
+    <div class="t-head">
+      <span class="ey rv">what restaurants say</span>
+      <h2 class="serif rv">London trusts<br><em>finallcall.</em></h2>
+    </div>
+    <div class="t-grid" id="testiSlider">
+      <div class="t-card rv d1">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-q">"The staff is very helpful and willing to be a part of the team. Made a difficult evening run like nothing happened."</p>
+        <div class="t-auth"><div class="t-av">L</div><div><div class="t-nm">Linda</div><div class="t-vn">Owner · Tasty Jerk</div></div></div>
+      </div>
+      <div class="t-card rv d2">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-q">"The team is very thoughtful and makes the whole process smooth. Had a replacement confirmed within the hour."</p>
+        <div class="t-auth"><div class="t-av">C</div><div><div class="t-nm">Collins</div><div class="t-vn">Owner · Nova Chelsea</div></div></div>
+      </div>
+      <div class="t-card rv d3">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-q">"Very straightforward process with great support throughout. Used for a VIP event — worked perfectly."</p>
+        <div class="t-auth"><div class="t-av">A</div><div><div class="t-nm">Ake</div><div class="t-vn">Private VIP Event</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- PRICING SECTION -->
+<div class="pricing-section">
+  <div class="pricing-inner">
+    <div class="pricing-tag">Our Service</div>
+    <div class="pricing-title"> <h2>Change staff every week? <br> We have <em> 3 months guarantee </em> </h2>
+    <p>We handle onboarding paperwork, reference checks, and every interview is built on 10 years London F&B management experience.</p>
+ 
+ 
+    <div class="pricing-grid">
+ 
+      <!-- Card 1: Beginner -->
+      <div class="p-card">
+        <div class="p-card-title">Need Temporary?</div>
+        <div class="p-card-desc">When you need staff for 1 day cover or short-term contract </div>
+        <div class="p-divider"></div>
+        <div class="p-features">
+          <div class="p-feat"><div class="p-feat-ic">✓</div>Tailor curated for your restaurant</div>
+          <div class="p-feat"><div class="p-feat-ic">✓</div>As minimum as 3 hours shift</div>
+          <div class="p-feat"><div class="p-feat-ic">✓</div>Handle onboarding paper on your behalf</div>
+          <div class="p-feat"><div class="p-feat-ic">✓</div>Reference available every candidate</div>
+        </div>
+        <div class="p-divider"></div>
+        <div class="p-installment">
+          <div class="p-install-dot"></div>
+          Pay as you go &nbsp;| Cancel anytime.
+        </div>
+         <div class="p-bottom">
+          <!--div>
+            <span class="p-price-main">24 900₽</span>
+            <span class="p-price-old">37 400₽</span>
+          </div-->
+          <a href="https://calendly.com/apcy-w-finallcall/30min" class="p-btn">Book a demo</a>
+        </div>
+      </div>
+ 
+      <!-- Card 2: Designer -->
+      <div class="p-card">
+        <div class="p-card-title">Need Permanant?</div>
+        <div class="p-card-desc">When you need full-time, part-time in any roles</div>
+         <div class="p-divider"></div>
+         <div class="p-features">
+          <div class="p-feat"><div class="p-feat-ic">✓</div>Tailor curate for your restaurant</div>
+          <div class="p-feat"><div class="p-feat-ic">✓</div>Guarantee 3 months without extra charge</div>
+           <div class="p-feat"><div class="p-feat-ic">✓</div>Handle onboarding paper on your behalf</div>
+          <div class="p-feat"><div class="p-feat-ic">✓</div>Reference available every candidate</div>
+        </div>
+        <div class="p-divider"></div>
+        <div class="p-installment">
+          <div class="p-install-dot"></div>
+          Pay as you go &nbsp;| Cancel anytime.
+        </div>
+        <div class="p-bottom">
+          <!--div>
+            <span class="p-price-main">24 900₽</span>
+            <span class="p-price-old">37 400₽</span>
+          </div-->
+          <a href="https://calendly.com/apcy-w-finallcall/30min" class="p-btn">Book a demo</a>
+        </div>
+      </div>
+ 
+    </div>
+
+     <h4>Available Roles</h4>
+    <div class="roles-grid rv">
+      <div class="r-card"><div class="r-nm">bartender</div></div>
+      <div class="r-card"><div class="r-nm">barback</div></div>
+      <div class="r-card"><div class="r-nm">barista</div></div>
+      <div class="r-card"><div class="r-nm">waiter</div></div>
+      <div class="r-card"><div class="r-nm">runner</div></div>
+      <div class="r-card"><div class="r-nm">host</div></div>
+      <div class="r-card"><div class="r-nm">kitchen porter</div></div>
+      <div class="r-card"><div class="r-nm">chef</div></div>
+    </div>
+  </div>
+</div>
+ 
+<!-- FAQ SECTION -->
+<div class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-title">FAQ</div>
+ 
+    <div class="faq-list" id="faqList">
+ 
+     <div class="faq-item">
+  <div class="faq-q">
+    <span class="faq-q-text">When do I need to pay?</span>
+    <div class="faq-icon">+</div>
+  </div>
+  <div class="faq-body"><div class="faq-body-inner-wrap">
+    <div class="faq-body-text">
+      <strong>Temporary staff</strong> — Invoices are sent every Sunday.<br>
+      <strong>Permanent staff</strong> — Salary is processed through us for the first month. Invoices are sent every Sunday.
+    </div>
+  </div></div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">
+    <span class="faq-q-text">What if I'm not happy with the staff you send?</span>
+    <div class="faq-icon">+</div>
+  </div>
+  <div class="faq-body"><div class="faq-body-inner-wrap">
+    <div class="faq-body-text">
+      <strong>Temporary staff</strong> — You may send a candidate home only if they are unable to meet your requirements or behave unacceptably (e.g. intoxicated on shift). We will arrange a replacement within 2 hours of being notified.<br>
+      <strong>Permanent staff</strong> — Charges begin once the candidate passes their interview and trial shift. If they leave within 3 months, we will find a replacement at no extra charge.
+    </div>
+  </div></div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">
+    <span class="faq-q-text">Who is responsible if an accident happens at my restaurant?</span>
+    <div class="faq-icon">+</div>
+  </div>
+  <div class="faq-body"><div class="faq-body-inner-wrap">
+    <div class="faq-body-text">
+      Under UK law, you are responsible for providing first aid to the candidate with the same duty of care as your own employees. For any specific case, <a href="https://finallcall.com/terms-and-conditions">check here</a>.
+    </div>
+  </div></div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">
+    <span class="faq-q-text">Are your staff experienced? How do I know they're reliable?</span>
+    <div class="faq-icon">+</div>
+  </div>
+  <div class="faq-body"><div class="faq-body-inner-wrap">
+    <div class="faq-body-text">
+      We recruit experienced staff with verified references. Some entry-level roles — such as runner and kitchen porter — are open to candidates without prior experience.
+    </div>
+  </div></div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">
+    <span class="faq-q-text">What is the minimum rate of pay?</span>
+    <div class="faq-icon">+</div>
+  </div>
+  <div class="faq-body"><div class="faq-body-inner-wrap">
+    <div class="faq-body-text">
+      UK National Minimum Wage + £2 per hour service charge.
+    </div>
+  </div></div>
+</div>
+     
+ 
+    </div>
+  </div>
+</div>
+
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-wrap">
+    <span class="ey rv">our story</span>
+    <h2 class="serif rv">Built by people who<br>know <em>hospitality.</em></h2>
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="rv">Founded in mid-2025 by <strong>Joy Wajanavisit</strong> — UAL School President representing over 5,000 students — Finallcall was born from the cost-of-living crisis and a decade of hands-on hospitality experience across London.</p>
+        <p class="rv">Joy invited her lifelong friend <strong>Ksenia Viller</strong>, a former NHS AI/ML specialist in virology, to build the platform. Together they set out to solve hospitality's recurring staffing crisis with technology that is genuinely fair.</p>
+        <p class="rv">We share a mission: to build technology that solves hospitality's workforce challenges, keeps restaurants viable, and creates fair opportunities for every worker — regardless of background.</p>
+      </div>
+      <div class="about-right rv">
+        <!-- replace YOUR_IMAGE.jpg with your file -->
+        <img src="images/P1.jpg" alt="Our story"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="about-img-placeholder" style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-in">
+    <span class="ey rv">get started</span>
+    <h2 class="serif rv">Still use agency?<br>Try <em>real-time hiring</em></h2>
+    <p class="rv">whether you need cover tonight or want to build a fairer long-term staffing strategy — finallcall is ready.</p>
+    <div class="cta-btns rv">
+      <a href="finallcall.com" class="btn-dark">
+        request staff
+      </a>
+      <a href="https://calendly.com/apcy-w-finallcall/30min" class="btn-brd">book a demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-in">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="#" class="f-logo">finallcall<span>.</span></a>
+        <p>london-based ai-native staffing agency. fair hiring. fast placement. built for hospitality.</p>
+      </div>
+      <div class="f-cols">
+        <div class="f-col">
+          <h5>for restaurants</h5>
+          <a href="https://wa.me/447787729413">request staff</a>
+          <a href="https://calendly.com/apcy-w-finallcall/30min">book a demo</a>
+          <a href="#how">faq</a>
+          <a href="#roles">available roles</a>
+          <a href="https://calendly.com/apcy-w-finallcall/30min">blog</a>
+        </div>
+        <div class="f-col">
+          <h5>for workers</h5>
+          <a href="https://finallcall.com">find work</a>
+          <a href="https://wa.me/447787729413">join as staff</a>
+        </div>
+        <div class="f-col">
+          <h5>company</h5>
+          <a href="#about">about us</a>
+          <a href="https://finallcall.com/terms-and-conditions">terms of service</a>
+          <a href="mailto:acpy.w@finallcall.com">contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bot">
+      <div class="f-copy">© 2025 finallcall ltd. all rights reserved. · london, uk</div>
+      <div class="f-soc">
+        <a href="https://wa.me/447787729413" class="soc" title="whatsapp"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://www.instagram.com/finallcall.london/" class="soc" title="instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.linkedin.com/company/finallcall" class="soc" title="linkedin"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+  
+</footer>
+
+<script>
+
+// hero scrolls up over video, then sticks, then both release together
+const heroEl = document.querySelector('.hero');
+const photoHeroEl = document.querySelector('.photo-hero');
+
+function handleHeroSticky() {
+  const videoRect = photoHeroEl.getBoundingClientRect();
+  const videoMid = videoRect.top + videoRect.height * 0.1; // midpoint of video
+
+  if (videoMid <= 56) {
+    // video midpoint has passed nav — hero becomes sticky too
+    heroEl.style.position = 'sticky';
+    heroEl.style.top = '56px';
+  } else {
+    // hero scrolls normally up over the video
+    heroEl.style.position = 'relative';
+    heroEl.style.top = 'auto';
+  }
+}
+
+window.addEventListener('scroll', handleHeroSticky, { passive: true });
+// testimonial slide
+const testiSlider = document.getElementById('testiSlider');
+let tDown = false, tStartX, tScrollLeft;
+testiSlider.addEventListener('mousedown', e => {
+  tDown = true;
+  testiSlider.classList.add('dragging');
+  tStartX = e.pageX - testiSlider.offsetLeft;
+  tScrollLeft = testiSlider.scrollLeft;
+});
+window.addEventListener('mouseup', () => {
+  tDown = false;
+  testiSlider.classList.remove('dragging');
+});
+testiSlider.addEventListener('mousemove', e => {
+  if (!tDown) return;
+  e.preventDefault();
+  const x = e.pageX - testiSlider.offsetLeft;
+  testiSlider.scrollLeft = tScrollLeft - (x - tStartX) * 1.5;
+});
+
+  // Counter animation
+function animateCounter(el, target, suffix, duration = 4000) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) {
+      el.textContent = target + suffix;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(start) + suffix;
+    }
+  }, 16);
+}
+
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      animateCounter(el, target, suffix);
+      counterObs.unobserve(el); // นับแค่ครั้งเดียว
+    }
+  });
+}, { threshold: 0.5 });
+
+// faq
+
+const items = document.querySelectorAll('#faqList .faq-item');
+ 
+items.forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    // close all simultaneously
+    items.forEach(i => i.classList.remove('open'));
+    // open this one if it was closed
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+
+document.querySelectorAll('.st-n em').forEach(el => counterObs.observe(el));
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:0.1});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
